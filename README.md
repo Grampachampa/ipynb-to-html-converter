@@ -1,40 +1,41 @@
-# .ipynb to .html converter
-The converter will go over the folders in the directory one by one, and convert the .ipynb files in each folder to .html. You will need nbconvert installed. Here are the steps to use this thing:
+# .ipynb to .html Converter 🌐
+This tool runs through a directory, and converts all .ipynb files to HTML files. You can then also use it to automate sending these HTML files to students.
 
 ## USAGE
-### 1) git clone this repo into the directory that you want to use it in. 📝
-It should look like the picture below:<br>
-![Alt text](image-2.png)<br>
-**It doesn't matter if the .ipynb files are in folders, or what they are called unless id_mode = "FILE".**
+### 1) Clone this Repo 📝
+Git clone this repository into the directory you want to convert. Here's what your setup should look like:
+![Your Setup](image-2.png)
 
-### 2) Open "RUN THIS ONE.ipynb", set your settings, and run the file. 🚀
-Open the file "RUN THIS ONE.ipynb". Then, just read through it, and run the cells in order, and change the required params in the last cell. The ones you HAVE to change are in the file, but below you can see the optional ones to change:
-## Reqired Params (for sending emails)
+Note: The names and locations of the .ipynb files don't matter (as long as it's in the parent directory or a subdirectory of it) when `id_mode` is set to "SCRAPE". When it's set to "FILE", however, it assumes the name of the folder it is located in to be the student's VUnet ID 
+
+### 2) Run "RUN THIS ONE.ipynb" 🚀
+Crack open the file "RUN THIS ONE.ipynb", give the cells a read, and run them in sequence. Modify the essential parameters in the final cell as needed. The must-change ones are listed in the file, but here are some optional tweaks you can make:
+
+## Required Params 🛠
 ### ta_name
-Your name - used in the email as "Sincerely, yourname".
+Your name – for signing off emails.
 ### ta_email
-The address that emails will be sent from
+The email address from which your emails will be sent.
 ### ta_email_password
-Password to ta_email
+The password to said email address.
 ### assignment_number
-assignment number - should be formatted as "Assignment 2" or "Midterm"
+The assignment's number or name - "Midterm", "Assignment 2", etc.
 
-## Optional Params
+## Optional Params 🧙‍♂️
 ### dir_path
-The path of the directory to convert the files in (optional). Default is the current directory. You shouldn't change this.
+The path to the directory with all the files. Defaults to the dir you cloned the file into. Change at your own risk.
 ### file_convert
-Whether or not to convert ipynb files to html. Default is True. I wouldn't turn this off, since already-converted files are not converted twice regardless.
+Set to True to turn .ipynb files into .html. Not much point in turning this off, since already-converted files are skipped.
 ### send_email
-Whether or not to send the emails. Default is True.
+True if you want to send emails containing .html files (each is sent immedeately after .ipynb conversion).
 ### test_mode
-Whether or not to run in test mode. Default is False. -> When True, only converts the first file and sends it to yourself to ensure that everything works as intended.
+Set to True for a trial run. It converts the first file and emails it to you – best practice is to ALWAYS have this on the first time you run the code.
 ### go_to_vunet_id
-The vunet id to start at. Default is None, which starts at the first folder in the parent directory. Use if the cell crashes mid-run to start from a certain vunet id. This avoids sending emails twice.
-
+You're here because your script died halfway through sending emails due to email server timeout. Set this to the vunet ID you want to restart from. Simple as.
 ### id_mode
-"SCRAPE" for scraping from the file (students can and WILL find ways to make this break, believe me)
+"SCRAPE" gets VUnet ID from file contents.
 
-"FILE" for file path
+"FILE" gets VUnet ID based on the file's parent directory (i.e. folder name is vunet id).
 
-## Final Notes/Quirks
-Due to the way that outlook handles automated emails (i.e. poorly), you Cc yourself in every sent email. This is the only way that I have found to actually be able to see the sent emails, for whatever reason. If this annoys you (it will), I recommend setting up a separate folder in outlook that automatically collects any emails sent by you that have "Feedback and Results" in the subject.
+## Final Notes/Quirks 📝
+Outlook can be weird with automated emails - where they don't show up as "Sent", despite you sending them. As a result, the script Cc's the sender (you) in every email. To avoid a flooded inbox, set up a folder in Outlook for emails sent by yourself that contain "Feedback and Results" in the title. This way, you don't end up with 450+ emails in your inbox.
